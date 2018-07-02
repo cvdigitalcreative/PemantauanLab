@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1089978151875",
+    "firebase_url": "https://pemantauanlabrosalina.firebaseio.com",
+    "project_id": "pemantauanlabrosalina",
+    "storage_bucket": "pemantauanlabrosalina.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089978151875:android:2902e010d38b6afd",
+        "android_client_info": {
+          "package_name": "com.rosalina.pemantauanlab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1089978151875-jqs6t9v5jv0cn2ldn02iaffmjfuhld91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rosalina.pemantauanlab",
+            "certificate_hash": "e9808507080cd380e4115c06e3314f68ab171046"
+          }
+        },
+        {
+          "client_id": "1089978151875-e5bq848nnlsit4a7g6387ruvne83pqa1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjApz3EiM1D32fP8vRGe-9AXXZWYwdKsU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1089978151875-e5bq848nnlsit4a7g6387ruvne83pqa1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PemantauanLab</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="status_login">
+        <item>Kepala Laboratorium</item>
+        <item>Kasi Laboratorium</item>
+        <item>Mahasiswa</item>
+    </string-array>
+</resources>
