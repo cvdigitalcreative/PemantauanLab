@@ -12,10 +12,10 @@ import com.rosalina.pemantauanlab.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class History_frag extends Fragment {
+public class ListLaporan_frag extends Fragment {
 
 
-    public History_frag() {
+    public ListLaporan_frag() {
         // Required empty public constructor
     }
 

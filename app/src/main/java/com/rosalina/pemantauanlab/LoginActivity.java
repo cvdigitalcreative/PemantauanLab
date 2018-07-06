@@ -18,7 +18,9 @@ public class LoginActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.container, fragment)
                            .commit();
-
     }
-
+    @Override
+    public void onBackPressed(){
+        moveTaskToBack(true);
+    }
 }

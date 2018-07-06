@@ -15,7 +15,7 @@
             android:id="@+id/text_input_namamhs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama Mahasiswa"/>
+            android:hint="Nama"/>
     </LinearLayout>
 
     <LinearLayout
