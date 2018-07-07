@@ -70,7 +70,7 @@ public class Menuactivity extends AppCompatActivity {
                     case R.id.history_menu:
                         fragment = new ListLaporan_frag();
                         loadFragment(fragment);
-                        toolbar.setTitle("Riwiayat");
+                        toolbar.setTitle("List Laporan");
                         return true;
                     case R.id.data_menu:
                         fragment = new Data_frag();

@@ -47,14 +47,6 @@ public class Lapor_frag extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-//        LoginForm loginForm = new LoginForm();
-//        Bundle args =loginForm.getArguments();
-//        if (args != null){
-//            userUid = args.getString("userUid");
-//        } else {
-//            Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
-//        }
-
         Button btn_submit =  view.findViewById(R.id.btn_kirim);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
