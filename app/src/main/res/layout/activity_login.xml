@@ -7,11 +7,4 @@
     android:id="@+id/container"
     tools:context="com.rosalina.pemantauanlab.LoginActivity">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemIconTint="#fff"
-        app:itemTextColor="#fff"/>
 </RelativeLayout>
