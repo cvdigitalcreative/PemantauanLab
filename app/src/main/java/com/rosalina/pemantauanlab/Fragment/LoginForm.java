@@ -6,14 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,14 +26,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.rosalina.pemantauanlab.Menuactivity;
 import com.rosalina.pemantauanlab.R;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class LoginForm extends Fragment {
     FirebaseAuth firebaseAuth;
-    private EditText email, pass;
+    private EditText email;
+    private EditText pass;
     private DatabaseReference mDatabase;
     String userid;
 
@@ -53,6 +49,7 @@ public class LoginForm extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login_form, container, false);
         email = view.findViewById(R.id.mail_user);
         pass =  view.findViewById(R.id.pass_user);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         final Button btn_registrasi =  view.findViewById(R.id.btn_register);
@@ -70,40 +67,87 @@ public class LoginForm extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Checklogin();
+                String usernameII = email.getText().toString().trim();
+                //Checklogin(); //Login With Email
+                CheckLoginbyUsername(usernameII); //Login With Username
             }
         });
         return view;
     }
 
+    private void CheckLoginbyUsername(final String username){
+
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                boolean check = false;
+                String email = null;
+                int status_user = 0;
+                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                    if (dataSnapshot1.child("username").getValue().equals(username)){
+                        check = true;
+                        email = dataSnapshot1.child("email").getValue().toString();
+                        status_user = Integer.valueOf(dataSnapshot1.child("status").getValue().toString());
+                        break;
+                    }
+                }
+
+                if (check==true){
+                    final String emailuser = email;
+
+                    final int finalStatus_user = status_user;
+                    firebaseAuth.signInWithEmailAndPassword(emailuser, pass.getText().toString()).addOnCompleteListener(getActivity(),
+                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    Intent in = new Intent(getActivity(), Menuactivity.class);
+                                    in.putExtra("keylogin", finalStatus_user);
+                                    startActivity(in);
+                                }
+                            });
+                } else {
+                    Toast.makeText(getActivity(), "Email and Password Error", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
     private void Checklogin() {
         firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Log.d(TAG, "Loading");
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    userid = user.getUid();
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()){
+                            Toast.makeText(getActivity(), "Email and Password Error", Toast.LENGTH_LONG).show();
+                        }else {
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            userid = user.getUid();
 
+                            mDatabase.child("Users").child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    mDatabase.child("Users").child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                    int status_user = Integer.valueOf(dataSnapshot.child("status").getValue().toString());
+                                    Intent in = new Intent(getActivity(), Menuactivity.class);
+                                    in.putExtra("keylogin", status_user);
+                                    startActivity(in);
+                                }
 
-                            int status_user=Integer.valueOf(dataSnapshot.child("status").getValue().toString());
-                                Intent in = new Intent(getActivity(), Menuactivity.class);
-                                in.putExtra("keylogin", status_user);
-                                startActivity(in);
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
                         }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Toast.makeText(getActivity(), "Database Error, Refresh  please", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            }
-        });
+                    }
+                });
     }
 }

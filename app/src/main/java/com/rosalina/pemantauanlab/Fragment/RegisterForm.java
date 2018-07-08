@@ -96,6 +96,7 @@ public class RegisterForm extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     FirebaseUser user = firebaseAuth.getCurrentUser();
+
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
                     reference.child("username").setValue(username);
                     reference.child("email").setValue(email);

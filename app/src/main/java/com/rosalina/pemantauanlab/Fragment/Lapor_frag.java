@@ -12,11 +12,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.rosalina.pemantauanlab.Model;
 import com.rosalina.pemantauanlab.R;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -25,7 +34,7 @@ import static android.support.constraint.Constraints.TAG;
  */
 public class Lapor_frag extends Fragment {
 
-    private DatabaseReference mDatabase;
+    List<Model> list = new ArrayList<>();
     FirebaseAuth firebaseAuth;
     public Lapor_frag() {
         // Required empty public constructor
@@ -45,6 +54,13 @@ public class Lapor_frag extends Fragment {
         final EditText jumlah = view.findViewById(R.id.text_input_jumlah);
         final EditText uraian =  view.findViewById(R.id.text_input_uraiankerusakan);
 
+
+
+//
+//        int datetime = calendar.get(Calendar.DATE);
+//        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+//        int minute = calendar.get(Calendar.MINUTE);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         Button btn_submit =  view.findViewById(R.id.btn_kirim);
@@ -52,6 +68,21 @@ public class Lapor_frag extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: attempting to signup.");
+
+                Date calendar = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                String currentdate = dateFormat.format(calendar);
+                System.out.println(currentdate);
+//                DateFormat dateFormat = DateFormat.getDateF
+//                String currentdate = currenttime.toString();
+//                System.out.println(currenttime);
+
+
+//                String month = calendar.get(Calendar.MONTH);
+//                String date = calendar.get(Calendar.DATE);
+//                String hours = calendar.get(Calendar.HOUR_OF_DAY);
+//                String minute = calendar.get(Calendar.MINUTE);
+
 
                 //check for null valued Editext
                 if (!isEmpty(namamhs.getText().toString().trim()) && !isEmpty(kelas.getText().toString().trim())
@@ -67,9 +98,10 @@ public class Lapor_frag extends Fragment {
                     final String string_lokasi = lokasi.getText().toString();
                     final String string_jumlah = jumlah.getText().toString();
                     final String string_uraian = uraian.getText().toString();
+
                     Insertdatalaporan(string_namamhs, string_kelas, string_namabarang,
                             string_nounit, string_lokasi, string_jumlah,
-                            string_uraian);
+                            string_uraian, currentdate);
 
                     Toast.makeText(getActivity(), "Laporan Telah Berhasil Di Upload", Toast.LENGTH_LONG).show();
                 } else{
@@ -84,13 +116,26 @@ public class Lapor_frag extends Fragment {
         return string.equals("");
     }
 
-    private void Insertdatalaporan(String namamhs, String kelas, String namabarang, String nounit, String lokasi, String jumlah, String uraian) {
+    private void Insertdatalaporan(String namamhs, String kelas, String namabarang, String nounit, String lokasi, String jumlah,
+                                   String uraian, String currentdate) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser currentuser = firebaseAuth.getCurrentUser();
         String uid = currentuser.getUid();
 
         String key = database.getReference("Lapor").push().getKey();
-        DatabaseReference reference = database.getReference().child("Laporan").child("Uid_laporan: " +key);
+        DatabaseReference reference = database.getReference().child("Laporan").child(key);
+
+      // Model gvalue = reference.setValue(Model.class);
+
+      // String nama1 = gvalue.getNama();
+//        String kelas = gvalue.getKelas();
+//        String namabarang = gvalue.getNama_barang();
+//        String nounit = gvalue.getNo_unit();
+//        String lokasi = gvalue.getLokasi();
+//        String jumlah = gvalue.getJumlah();
+//        String uraian = gvalue.getUraian_kerusakan();
+
+        //Write harus pake model
         reference.child("userUid").setValue(uid);
         reference.child("nama_pelapor").setValue(namamhs);
         reference.child("kelas").setValue(kelas);
@@ -99,6 +144,8 @@ public class Lapor_frag extends Fragment {
         reference.child("lokasi").setValue(lokasi);
         reference.child("jumlah").setValue(jumlah);
         reference.child("uraian").setValue(uraian);
+        reference.child("date").setValue(currentdate);
+        reference.child("status_laporan").setValue("unread");
 
         redirectScreen();
     }

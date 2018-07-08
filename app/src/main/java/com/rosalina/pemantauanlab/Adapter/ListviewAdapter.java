@@ -39,8 +39,6 @@ public class ListviewAdapter extends RecyclerView.Adapter<ListviewAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
     final Model model = listmodel.get(position);
-        System.out.println("coy");
-        System.out.println( model.getNama());
     holder.nama.setText(model.getNama());
     holder.namabarang.setText(model.getNama_barang());
     holder.kelas.setText(model.getKelas());

@@ -1,5 +1,7 @@
 package com.rosalina.pemantauanlab;
 
+import com.google.firebase.database.PropertyName;
+
 public class Model {
     public String nama;
     public String kelas;
@@ -8,6 +10,17 @@ public class Model {
     public String lokasi;
     public String jumlah;
     public String uraian_kerusakan;
+
+//    public Model(String nama, String kelas, String nama_barang,
+//                 String no_unit, String lokasi, String jumlah, String uraian_kerusakan){
+//        this.nama = nama;
+//        this.kelas = kelas;
+//        this.nama_barang = nama_barang;
+//        this.no_unit = no_unit;
+//        this.lokasi = lokasi;
+//        this.jumlah = jumlah;
+//        this.uraian_kerusakan = uraian_kerusakan;
+//    }
 
     public String getNama() {
         return nama;
