@@ -136,6 +136,7 @@ public class Lapor_frag extends Fragment {
 //        String uraian = gvalue.getUraian_kerusakan();
 
         //Write harus pake model
+        reference.child("status_laporan").setValue("unread");
         reference.child("userUid").setValue(uid);
         reference.child("nama_pelapor").setValue(namamhs);
         reference.child("kelas").setValue(kelas);
@@ -145,8 +146,6 @@ public class Lapor_frag extends Fragment {
         reference.child("jumlah").setValue(jumlah);
         reference.child("uraian").setValue(uraian);
         reference.child("date").setValue(currentdate);
-        reference.child("status_laporan").setValue("unread");
-
         redirectScreen();
     }
 

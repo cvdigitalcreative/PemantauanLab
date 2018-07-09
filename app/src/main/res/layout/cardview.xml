@@ -55,6 +55,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="D3 Bilingual"/>
+                <TextView
+                    android:id="@+id/Uid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -3,6 +3,8 @@ package com.rosalina.pemantauanlab;
 import com.google.firebase.database.PropertyName;
 
 public class Model {
+
+    public String uid;
     public String nama;
     public String kelas;
     public String nama_barang;
@@ -10,17 +12,23 @@ public class Model {
     public String lokasi;
     public String jumlah;
     public String uraian_kerusakan;
+    public String status_laporan;
 
-//    public Model(String nama, String kelas, String nama_barang,
-//                 String no_unit, String lokasi, String jumlah, String uraian_kerusakan){
-//        this.nama = nama;
-//        this.kelas = kelas;
-//        this.nama_barang = nama_barang;
-//        this.no_unit = no_unit;
-//        this.lokasi = lokasi;
-//        this.jumlah = jumlah;
-//        this.uraian_kerusakan = uraian_kerusakan;
-//    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getStatus_laporan() {
+        return status_laporan;
+    }
+
+    public void setStatus_laporan(String status_laporan) {
+        this.status_laporan = status_laporan;
+    }
 
     public String getNama() {
         return nama;
@@ -76,5 +84,6 @@ public class Model {
 
     public void setUraian_kerusakan(String uraian_kerusakan) {
         this.uraian_kerusakan = uraian_kerusakan;
+
     }
 }

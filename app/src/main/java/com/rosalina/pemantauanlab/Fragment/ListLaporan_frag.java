@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,24 +57,13 @@ public class ListLaporan_frag extends Fragment {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            myRef.addValueEventListener(new ValueEventListener() {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                            System.out.println(dataSnapshot);
-
-                            //Read Using Model too
-//                        Model value = dataSnapshot1.getValue(Model.class);
                             Model model = new Model();
 
-//                        String nama = value.getNama();
-//                        String kelas = value.getKelas();
-//                        String namabarang = value.getNama_barang();
-//                        String nounit = value.getNo_unit();
-//                        String lokasi = value.getLokasi();
-//                        String jumlah = value.getJumlah();
-//                        String uraian = value.getUraian_kerusakan();
-
+                            String uid=dataSnapshot1.getKey();
                             String nama = dataSnapshot1.child("nama_pelapor").getValue().toString();
                             String kelas = dataSnapshot1.child("kelas").getValue().toString();
                             String namabarang = dataSnapshot1.child("nama_barang").getValue().toString();
@@ -81,7 +71,8 @@ public class ListLaporan_frag extends Fragment {
                             String lokasi = dataSnapshot1.child("lokasi").getValue().toString();
                             String jumlah = dataSnapshot1.child("jumlah").getValue().toString();
                             String uraian = dataSnapshot1.child("uraian").getValue().toString();
-//
+
+                            model.setUid(uid);
                             model.setNama(nama);
                             model.setKelas(kelas);
                             model.setNama_barang(namabarang);
