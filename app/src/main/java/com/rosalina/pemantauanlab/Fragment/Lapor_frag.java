@@ -12,15 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.rosalina.pemantauanlab.Model;
+import com.rosalina.pemantauanlab.Model.Model;
 import com.rosalina.pemantauanlab.R;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,8 +53,6 @@ public class Lapor_frag extends Fragment {
         final EditText uraian =  view.findViewById(R.id.text_input_uraiankerusakan);
 
 
-
-//
 //        int datetime = calendar.get(Calendar.DATE);
 //        int hours = calendar.get(Calendar.HOUR_OF_DAY);
 //        int minute = calendar.get(Calendar.MINUTE);
@@ -124,7 +120,6 @@ public class Lapor_frag extends Fragment {
 
         String key = database.getReference("Lapor").push().getKey();
         DatabaseReference reference = database.getReference().child("Laporan").child(key);
-
       // Model gvalue = reference.setValue(Model.class);
 
       // String nama1 = gvalue.getNama();
@@ -136,7 +131,10 @@ public class Lapor_frag extends Fragment {
 //        String uraian = gvalue.getUraian_kerusakan();
 
         //Write harus pake model
-        reference.child("status_laporan").setValue("unread");
+        reference.child("terima").setValue("tidak");
+        reference.child("status_done").setValue("undone");
+        reference.child("status_ongoing").setValue("notgoing");
+        reference.child("status_read").setValue("unread");
         reference.child("userUid").setValue(uid);
         reference.child("nama_pelapor").setValue(namamhs);
         reference.child("kelas").setValue(kelas);

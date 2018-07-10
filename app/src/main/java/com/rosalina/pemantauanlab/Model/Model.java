@@ -1,9 +1,9 @@
-package com.rosalina.pemantauanlab;
+package com.rosalina.pemantauanlab.Model;
 
 import com.google.firebase.database.PropertyName;
 
 public class Model {
-
+    public String terima;
     public String uid;
     public String nama;
     public String kelas;
@@ -13,6 +13,32 @@ public class Model {
     public String jumlah;
     public String uraian_kerusakan;
     public String status_laporan;
+    public String status_ongoing;
+    public String status_done;
+
+    public String getTerima() {
+        return terima;
+    }
+
+    public void setTerima(String terima) {
+        this.terima = terima;
+    }
+
+    public String getStatus_ongoing() {
+        return status_ongoing;
+    }
+
+    public void setStatus_ongoing(String status_ongoing) {
+        this.status_ongoing = status_ongoing;
+    }
+
+    public String getStatus_done() {
+        return status_done;
+    }
+
+    public void setStatus_done(String status_done) {
+        this.status_done = status_done;
+    }
 
     public String getUid() {
         return uid;

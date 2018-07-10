@@ -54,7 +54,13 @@ public class RegisterForm extends Fragment {
         final Spinner spinnerregister = view.findViewById(R.id.spinner_register);
 
         spinnerRegister(spinnerregister);
-
+        final Button btn_login = view.findViewById(R.id.btn_login2);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectScreen();;
+            }
+        });
         final Button btn_register =  view.findViewById(R.id.btn_register);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,8 +111,6 @@ public class RegisterForm extends Fragment {
                 }
             }
         });
-
-
         redirectScreen();
     }
 

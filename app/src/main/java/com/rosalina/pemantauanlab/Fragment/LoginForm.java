@@ -68,8 +68,8 @@ public class LoginForm extends Fragment {
             @Override
             public void onClick(View v) {
                 String usernameII = email.getText().toString().trim();
-                //Checklogin(); //Login With Email
-                CheckLoginbyUsername(usernameII); //Login With Username
+                //Checklogin(); //<-- Login With Email
+                CheckLoginbyUsername(usernameII); // <-- Login With Username
             }
         });
         return view;

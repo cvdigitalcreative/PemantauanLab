@@ -9,15 +9,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rosalina.pemantauanlab.Fragment.Account_frag;
 import com.rosalina.pemantauanlab.Fragment.Data_frag;
 import com.rosalina.pemantauanlab.Fragment.ListLaporan_frag;
 import com.rosalina.pemantauanlab.Fragment.Home_frag;
 import com.rosalina.pemantauanlab.Fragment.Lapor_frag;
+import com.rosalina.pemantauanlab.Model.Model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Menuactivity extends AppCompatActivity {
     private ActionBar toolbar;
     private int getlogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +44,10 @@ public class Menuactivity extends AppCompatActivity {
         if (getlogin == 2){
             navigationView.getMenu().removeItem(R.id.data_menu);
             navigationView.getMenu().removeItem(R.id.history_menu);
+
+        } else {
+            navigationView.getMenu().removeItem(R.id.lapor_menu);
+
         }
 
         navigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
@@ -48,7 +62,6 @@ public class Menuactivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment)
                 .commit();
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
@@ -68,7 +81,10 @@ public class Menuactivity extends AppCompatActivity {
                         toolbar.setTitle("Lapor");
                         return true;
                     case R.id.history_menu:
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("keystatus", getlogin);
                         fragment = new ListLaporan_frag();
+                        fragment.setArguments(bundle);
                         loadFragment(fragment);
                         toolbar.setTitle("List Laporan");
                         return true;
