@@ -3,32 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.LoginForm"
+    tools:context=".Boundary.LoginForm"
     android:orientation="vertical"
-    android:padding="40dp"
-    android:gravity="center">
+    android:padding="50dp"
+    android:gravity="center"
+    android:background="@drawable/login">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selamat Datang"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:padding="20dp"/>
     <LinearLayout
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/mail_user"
+            android:textColor="@color/text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mail"/>
+            android:textColorHint="@color/text3"
+            android:hint="Username"/>
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/pass_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/text2"
+            android:textColorHint="@color/text3"
             android:hint="Password"/>
     </LinearLayout>
 
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="10dp">
+        android:padding="5dp">
         <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"

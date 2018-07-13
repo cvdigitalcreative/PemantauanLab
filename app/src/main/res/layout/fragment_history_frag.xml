@@ -3,12 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.ListLaporan_frag"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="60dp"
+    tools:context=".Boundary.ListLaporan_frag"
+    android:background="@color/bg"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recycle" />
+        android:background="@color/toolbar"
+        app:titleTextColor="@color/text"
+        android:id="@+id/toolbar"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycle" />
+    </LinearLayout>
 </LinearLayout>

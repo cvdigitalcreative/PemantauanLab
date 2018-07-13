@@ -9,15 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.rosalina.pemantauanlab.Fragment.Account_frag;
-import com.rosalina.pemantauanlab.Fragment.Data_frag;
-import com.rosalina.pemantauanlab.Fragment.ListLaporan_frag;
-import com.rosalina.pemantauanlab.Fragment.Home_frag;
-import com.rosalina.pemantauanlab.Fragment.Lapor_frag;
+import com.rosalina.pemantauanlab.Boundary.Account_frag;
+import com.rosalina.pemantauanlab.Boundary.Data_frag;
+import com.rosalina.pemantauanlab.Boundary.ListLaporan_frag;
+import com.rosalina.pemantauanlab.Boundary.Home_frag;
+import com.rosalina.pemantauanlab.Boundary.Lapor_frag;
 
 public class Menuactivity extends AppCompatActivity {
     private ActionBar toolbar;
     private int getlogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,15 @@ public class Menuactivity extends AppCompatActivity {
         if (getlogin == 2){
             navigationView.getMenu().removeItem(R.id.data_menu);
             navigationView.getMenu().removeItem(R.id.history_menu);
+
+        } else {
+            navigationView.getMenu().removeItem(R.id.lapor_menu);
+
         }
 
         navigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         // load the store fragment by default
-        toolbar.setTitle("Home");
+        // toolbar.setTitle("Home");
         loadFragment(new Home_frag());
 
     }
@@ -48,7 +53,6 @@ public class Menuactivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment)
                 .commit();
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
@@ -60,27 +64,25 @@ public class Menuactivity extends AppCompatActivity {
                     case R.id.home_menu:
                         fragment = new Home_frag();
                         loadFragment(fragment);
-                        toolbar.setTitle("Home");
                         return true;
                     case R.id.lapor_menu:
                         fragment = new Lapor_frag();
                         loadFragment(fragment);
-                        toolbar.setTitle("Lapor");
                         return true;
                     case R.id.history_menu:
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("keystatus", getlogin);
                         fragment = new ListLaporan_frag();
+                        fragment.setArguments(bundle);
                         loadFragment(fragment);
-                        toolbar.setTitle("List Laporan");
                         return true;
                     case R.id.data_menu:
                         fragment = new Data_frag();
                         loadFragment(fragment);
-                        toolbar.setTitle("Data");
                         return true;
                     case R.id.account_menu:
                         fragment = new Account_frag();
                         loadFragment(fragment);
-                        toolbar.setTitle("Akun");
                         return true;
             }
             return false;

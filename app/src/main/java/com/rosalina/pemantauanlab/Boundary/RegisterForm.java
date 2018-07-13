@@ -1,7 +1,7 @@
-package com.rosalina.pemantauanlab.Fragment;
+package com.rosalina.pemantauanlab.Boundary;
 
 
-import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,11 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,8 +53,15 @@ public class RegisterForm extends Fragment {
         final EditText mEditpass = view.findViewById(R.id.regis_pass);
         final Spinner spinnerregister = view.findViewById(R.id.spinner_register);
 
-        spinnerRegister(spinnerregister);
 
+        spinnerRegister(spinnerregister);
+        final Button btn_login = view.findViewById(R.id.btn_login2);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectScreen();;
+            }
+        });
         final Button btn_register =  view.findViewById(R.id.btn_register);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +89,7 @@ public class RegisterForm extends Fragment {
     }
 
     private void spinnerRegister(Spinner spinnerReg) {
-        final ArrayAdapter<String> spinadapter = new ArrayAdapter<>(this. getActivity(), android.R.layout.simple_dropdown_item_1line, getResources()
+        final ArrayAdapter<String> spinadapter = new ArrayAdapter<>(this. getActivity(), R.layout.custom_spinner, getResources()
                 .getStringArray(R.array.status_login));
         spinnerReg.setAdapter(spinadapter);
     }
@@ -105,8 +112,6 @@ public class RegisterForm extends Fragment {
                 }
             }
         });
-
-
         redirectScreen();
     }
 

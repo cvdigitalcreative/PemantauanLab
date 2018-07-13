@@ -3,22 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Fragment.Account_frag">
+    tools:context=".Boundary.Account_frag"
+    android:layout_marginBottom="60dp"
+    android:background="#ebecf0">
+
+    <android.support.v7.widget.Toolbar
+        android:background="@color/toolbar"
+        app:titleTextColor="@color/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="20dp">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/icon1"/>
         <LinearLayout
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:textColor="@color/text"
                 android:id="@+id/your_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,6 +39,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
             <TextView
+                android:textColor="@color/text2"
                 android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,11 +50,12 @@
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
         <Button
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Logout"/>
     </LinearLayout>
 
