@@ -1,6 +1,7 @@
 package com.rosalina.pemantauanlab.Adapter;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.rosalina.pemantauanlab.Fragment.ListLaporan_frag;
+import com.rosalina.pemantauanlab.Boundary.ListLaporan_frag;
 import com.rosalina.pemantauanlab.Model.Model;
 import com.rosalina.pemantauanlab.R;
 
@@ -23,10 +24,12 @@ import java.util.List;
 public class KepalaLab_RcAdapter extends RecyclerView.Adapter<KepalaLab_RcAdapter.ViewHolder> {
     private List<Model> listmodel;
     DatabaseReference myRef;
+    ListLaporan_frag context;
 
 
-    public KepalaLab_RcAdapter(List<Model> modelList) {
+    public KepalaLab_RcAdapter(List<Model> modelList, ListLaporan_frag context) {
         listmodel = modelList;
+        this.context = context;
     }
 
     @NonNull
@@ -40,11 +43,20 @@ public class KepalaLab_RcAdapter extends RecyclerView.Adapter<KepalaLab_RcAdapte
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
     final Model model = listmodel.get(position);
+    View view = null;
     holder.nama.setText(model.getNama());
     holder.namabarang.setText(model.getNama_barang());
-    holder.kelas.setText(model.getKelas());
     holder.uid.setText(model.getUid());
-    holder.ongoing.setText(model.status_ongoing);
+    //holder.ongoing.setText(model.status_ongoing);
+        if (model.status_done.equals("undone")){
+            holder.kelas.setText("Laporan Diterima");
+        } else if (model.status_done.equals("ongoingd")){
+            holder.kelas.setText("Sedang Dikerjakan");
+        } else if (model.status_done.equals("done")){
+            holder.kelas.setText("Selesai");
+        } else{
+            Toast.makeText(view.getContext(), "Error, Please Restart Application", Toast.LENGTH_LONG).show();
+        }
     holder.done.setText(model.status_done);
 
     //itemclicked
@@ -53,54 +65,74 @@ public class KepalaLab_RcAdapter extends RecyclerView.Adapter<KepalaLab_RcAdapte
             public void onClick(View v) {
                 setReadValue(holder.uid.getText().toString());
 
-                System.out.println("asdasdsa");
+
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
+                alertDialog.setCancelable(true);
+                LayoutInflater inflater = ((AppCompatActivity)v.getContext()).getLayoutInflater();
+                View dialogview = inflater.inflate(R.layout.dialogalert, null);
+                alertDialog.setView(dialogview);
 
-                alertDialog.setTitle("Detail Laporan")
-                    .setMessage("Nama : "+model.getNama()+"\n"
-                                +"Kelas : "+model.getKelas()+"\n"
-                                +"Nama Barang : "+model.getNama_barang()+"\n"
-                                +"Nomor Unit : "+model.getNo_unit()+"\n"
-                                +"Lokasi : "+model.getLokasi()+"\n"
-                                +"Jumlah : "+model.getJumlah()+"\n"
-                                +"Uraian Kerusakan : "+model.getUraian_kerusakan()+"\n"
-                        );
+                TextView namalist =  dialogview.findViewById(R.id.listlaporan_nama);
+                TextView kelas =  dialogview.findViewById(R.id.listlaporan_kelas);
+                TextView nama_barang =  dialogview.findViewById(R.id.listlaporan_barang);
+                TextView no_unit =  dialogview.findViewById(R.id.listlaporan_nounit);
+                TextView lokasi =  dialogview.findViewById(R.id.listlaporan_lokasi);
+                TextView jumlah =  dialogview.findViewById(R.id.listlaporan_jumlah);
+                TextView uraian =  dialogview.findViewById(R.id.listlaporan_uraian);
+                TextView status =  dialogview.findViewById(R.id.listlaporan_status);
 
-                button_dialogcostum(alertDialog, holder, holder.done.getText().toString(),holder.ongoing.getText().toString(), v);
+                //setAlert dialog
+                alertDialog.setTitle("Detail Laporan");
+                namalist.setText(model.getNama());
+                status.setText(model.getStatus_pelapor());
+                System.out.println(model.getStatus_pelapor());
+                kelas.setText(model.getKelas());
+                nama_barang.setText(model.getNama_barang());
+                no_unit.setText(model.getNo_unit());
+                lokasi.setText(model.getLokasi());
+                jumlah.setText(model.getJumlah());
+                uraian.setText(model.getUraian_kerusakan());
+
+                button_dialogcostum(alertDialog, holder, holder.done.getText().toString(), v);
             }
         });
     }
 
-    private void button_dialogcostum(final AlertDialog.Builder alertDialog, final ViewHolder holders, String done, String og, final View view) {
+    private void button_dialogcostum(final AlertDialog.Builder alertDialog, final ViewHolder holders, String done, final View view) {
         final AppCompatActivity activity = (AppCompatActivity) view.getContext();
-        if (og.equals("notgoing")) {
+        System.out.println(done);
+        if (done.equals("undone")) {
             alertDialog.setNegativeButton("Kerjakan", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, final int which) {
-                    setOngoingValue(holders.uid.getText().toString(), "ongoing");
+                    setDoneValue(holders.uid.getText().toString(), "ongoingd");
+                    //holders.kelas.setText("Sedang Dikerjakan");
                     Executelist(dialog, activity, which);
                 }
             });
-                } else if (og.equals("ongoing")){
+                } else if (done.equals("ongoingd")){
                   alertDialog.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
                   @Override
                   public void onClick(DialogInterface dialog, int which) {
-                    setOngoingValue(holders.uid.getText().toString(), "notgoing");
+                    setDoneValue(holders.uid.getText().toString(), "undone");
+                    //holders.kelas.setText("Laporan Diterima");
                     Executelist(dialog, activity, which);
                     }
                   });
                   alertDialog.setPositiveButton("Selesai", new DialogInterface.OnClickListener() {
                       @Override
                       public void onClick(DialogInterface dialog, int which) {
-                            setDoneValue(holders.uid.getText().toString(), "selesai");
+                            setDoneValue(holders.uid.getText().toString(), "done");
+                            //holders.kelas.setText("Laporan Selesai");
                             Executelist(dialog, activity, which);
                         }
                     });
 
-                    } else if (done.equals("selesai")){
-                alertDialog.setNeutralButton("Laporan Telah Di Selesaikan", new DialogInterface.OnClickListener() {
+                    } else if (done.equals("done")){
+                    alertDialog.setNeutralButton("Laporan Telah Di Selesaikan", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    setReadValue(holders.uid.getText().toString());
                     Executelist(dialog, activity, which);
                     Toast.makeText(view.getContext(), "Terima Kasih, Laporan Sudah Terlaksanakan", Toast.LENGTH_LONG).show();
                 }
@@ -134,12 +166,6 @@ public class KepalaLab_RcAdapter extends RecyclerView.Adapter<KepalaLab_RcAdapte
         myRef.child("Laporan").child(uid).child("status_done").setValue(decision);
     }
 
-    private void setOngoingValue(String uid, String decision) {
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        myRef = database.getReference();
-        myRef.child("Laporan").child(uid).child("status_ongoing").setValue(decision);
-    }
-
     private void setReadValue(String uid) {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -160,18 +186,11 @@ public class KepalaLab_RcAdapter extends RecyclerView.Adapter<KepalaLab_RcAdapte
             kelas = itemview.findViewById(R.id.kelas_pelapor);
             namabarang = itemview.findViewById(R.id.nama_barang);
 
-            //alertdialog
-
-            ongoing = itemview.findViewById(R.id.ongoing);
+//            //alertdialog
+//
             done = itemview.findViewById(R.id.done);
             uid = itemview.findViewById(R.id.Uid);
-            namalist = itemview.findViewById(R.id.listlaporan_nama);
-            kelaslist = itemview.findViewById(R.id.listlaporan_kelas);
-            namabaranglist = itemview.findViewById(R.id.listlaporan_barang);
-            jumlah = itemview.findViewById(R.id.listlaporan_jumlah);
-            nounit = itemview.findViewById(R.id.listlaporan_nounit);
-            lokasi = itemview.findViewById(R.id.listlaporan_lokasi);
-            uraiankerusakan = itemview.findViewById(R.id.listlaporan_uraian);
+//
         }
     }
 }

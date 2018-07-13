@@ -3,11 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.Data_frag"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Boundary.Data_frag"
     android:layout_marginBottom="60dp"
-    android:padding="5dp">
+    android:orientation="vertical"
+    android:background="@color/bg">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar"
+        app:titleTextColor="@color/text"
+        android:id="@+id/toolbar"/>
 
     <ListView
+        android:padding="9dp"
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -6,8 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.rosalina.pemantauanlab.Fragment.LoginForm;
+import com.rosalina.pemantauanlab.Boundary.LoginForm;
 
 public class LoginActivity extends AppCompatActivity {
     TextView textView;

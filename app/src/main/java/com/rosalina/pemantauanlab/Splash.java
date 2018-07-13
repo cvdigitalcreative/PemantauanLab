@@ -1,15 +1,11 @@
 package com.rosalina.pemantauanlab;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.rosalina.pemantauanlab.Fragment.LoginForm;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,7 +14,6 @@ public class Splash extends AppCompatActivity {
     private Timer timer;
     private ProgressBar progressBar;
     private int i=0;
-    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

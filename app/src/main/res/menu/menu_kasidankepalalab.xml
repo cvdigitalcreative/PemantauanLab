@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home_menu"
-        android:icon="@mipmap/ic_launcher"
-        android:title="home"/>
+        android:icon="@drawable/icon5"
+        android:title="beranda" />
     <item
         android:id="@+id/lapor_menu"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon4"
         android:title="lapor"/>
     <item
         android:id="@+id/history_menu"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon3"
         android:title="laporan"/>
     <item
         android:id="@+id/data_menu"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon2"
         android:title="data"/>
     <item
         android:id="@+id/account_menu"
-        android:icon="@mipmap/ic_launcher"
-        android:title="account"/>
+        android:icon="@drawable/icon1"
+        android:title="akun"/>
 </menu>

@@ -3,20 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".Fragment.Home_frag">
+    tools:context=".Boundary.Home_frag"
+    android:layout_marginBottom="60dp"
+    android:background="@color/bg">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Selamat Datang"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:textStyle="bold"/>
-    <TextView
+        android:background="@color/toolbar"
+        app:titleTextColor="@color/text"
+        android:id="@+id/toolbar"/>
 
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="@color/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selamat Datang, "
+                android:layout_gravity="center"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/username_nama"
+                android:textColor="@color/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:layout_gravity="left|bottom"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    <TextView
+        android:textColor="@color/text2"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:layout_width="match_parent"
@@ -25,20 +58,75 @@
         android:text="Di Aplikasi Pemantauan Laboratorium Jurusan Manajemen Informatika"
         android:gravity="center"/>
 
-    <TextView
-        android:id="@+id/new_laporanread"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="laporan"/>
-    <TextView
-        android:id="@+id/new_laporanongoing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="laporan"/>
-    <TextView
-        android:id="@+id/new_laporandone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="laporan"/>
 
+
+        <LinearLayout
+            android:id="@+id/layout_bawah"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+            <TextView
+                android:textColor="@color/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Laporan Masuk : "/>
+            <TextView
+                android:textColor="@color/text2"
+                android:id="@+id/new_laporanread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:text="laporan"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:textColor="@color/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Laporan Sedang Dikerjakan : "/>
+            <TextView
+                android:textColor="@color/text2"
+                android:id="@+id/new_laporanongoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:text=" laporan"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:textColor="@color/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Laporan Selesai : "/>
+            <TextView
+                android:textColor="@color/text2"
+                android:id="@+id/new_laporandone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:text="laporan"/>
+        </LinearLayout>
+     </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

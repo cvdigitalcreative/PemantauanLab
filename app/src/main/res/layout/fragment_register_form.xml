@@ -3,35 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.RegisterForm"
+    tools:context=".Boundary.RegisterForm"
     android:orientation="vertical"
     android:padding="40dp"
+    android:background="@drawable/daftar"
     android:gravity="center">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Form Pendaftaran"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:padding="20dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:padding="30dp"
         android:orientation="vertical">
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/username"
+            android:textColor="@color/text2"
+            android:textColorHint="@color/text3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"/>
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/regis_mail"
+            android:textColor="@color/text2"
+            android:textColorHint="@color/text3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mail"/>
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/regis_pass"
+            android:textColor="@color/text2"
+            android:textColorHint="@color/text3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"/>
@@ -40,7 +43,7 @@
     <Spinner
         android:id="@+id/spinner_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="40dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,18 +51,17 @@
         android:gravity="center"
         android:padding="10dp">
         <Button
-            android:id="@+id/btn_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:layout_marginRight="20dp"/>
-        <Button
             android:id="@+id/btn_login2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            />
+            android:layout_marginRight="20dp" />
 
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register" />
 
     </LinearLayout>
 

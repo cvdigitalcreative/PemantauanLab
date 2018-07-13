@@ -1,14 +1,18 @@
-package com.rosalina.pemantauanlab.Fragment;
+package com.rosalina.pemantauanlab.Boundary;
 
 
+import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,6 +39,7 @@ public class LoginForm extends Fragment {
     private EditText pass;
     private DatabaseReference mDatabase;
     String userid;
+    Context context;
 
     public LoginForm() {
         // Required empty public constructor
@@ -45,7 +50,6 @@ public class LoginForm extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         View view = inflater.inflate(R.layout.fragment_login_form, container, false);
         email = view.findViewById(R.id.mail_user);
         pass =  view.findViewById(R.id.pass_user);
@@ -95,8 +99,8 @@ public class LoginForm extends Fragment {
 
                 if (check==true){
                     final String emailuser = email;
-
                     final int finalStatus_user = status_user;
+                    System.out.println(finalStatus_user);
                     firebaseAuth.signInWithEmailAndPassword(emailuser, pass.getText().toString()).addOnCompleteListener(getActivity(),
                             new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -116,9 +120,8 @@ public class LoginForm extends Fragment {
 
             }
         });
-
-
     }
+
     private void Checklogin() {
         firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {

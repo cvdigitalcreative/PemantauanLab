@@ -1,13 +1,13 @@
-package com.rosalina.pemantauanlab.Fragment;
+package com.rosalina.pemantauanlab.Boundary;
 
 
-import android.content.Context;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +15,11 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
 import com.rosalina.pemantauanlab.R;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,17 +41,36 @@ public class Data_frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_data_frag, container, false);
+        //Toolbar
+        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
+        AppCompatActivity action = (AppCompatActivity)getActivity();
+        action.setSupportActionBar(toolbar);
+        action.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        action.setTitle("Data Lab");
+
         listView = view.findViewById(R.id.listview);
         listView.setAdapter(new dataListAdapter(t1, dirFile));
+
         //File file = new File(Environment.getExternalStorageDirectory()+"/excelfie/" +filename)
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setDataAndType(Uri.fromFile(),"application/vnd.ms-excel");
-//                startActivity(intent);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                System.out.println("asd");
+                System.out.println(Environment.getExternalStorageDirectory());
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/Telegram/Telegram Documents/" + "excel1.xlsx")), "application/vnd.ms-excel");
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+
+                try {
+                    startActivity(intent);
+                }
+                catch (ActivityNotFoundException e) {
+                    Toast.makeText(getContext(), "No Application Available to View Excel", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         //Reading excel file
 //        File fileDirectory = new File (Environment.getDataDirectory()+ "/excelfile/");
 //        dirFile = fileDirectory.listFiles();

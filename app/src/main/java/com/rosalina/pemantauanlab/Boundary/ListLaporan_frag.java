@@ -1,9 +1,10 @@
-package com.rosalina.pemantauanlab.Fragment;
+package com.rosalina.pemantauanlab.Boundary;
 
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +16,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.rosalina.pemantauanlab.Adapter.Kasi_RcAdapter;
 import com.rosalina.pemantauanlab.Adapter.KepalaLab_RcAdapter;
@@ -46,27 +46,34 @@ public class ListLaporan_frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_history_frag, container, false);
+        //Toolbar
+        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
+        AppCompatActivity action = (AppCompatActivity)getActivity();
+        action.setSupportActionBar(toolbar);
+        action.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        action.setTitle("Laporan Masuk");
+
         Bundle bundle = getArguments();
         int getkey_status = bundle.getInt("keystatus");
-        String uid = (String) bundle.getString("validator");
+        String uid = bundle.getString("validator");
         System.out.println("uid" +uid);
         System.out.println("coy");
         System.out.println(getkey_status);
 
         recyclerView = view.findViewById(R.id.recycle);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        kepalaLab_rcAdapter = new KepalaLab_RcAdapter(list);
-        kasiRcAdapter = new Kasi_RcAdapter(list);
+        kepalaLab_rcAdapter = new KepalaLab_RcAdapter(list,this);
+        kasiRcAdapter = new Kasi_RcAdapter(list, this);
         myRef = firebaseDatabase.getReference("Laporan");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        RecyclerFunction(recyclerView, getkey_status, uid);
+        RecyclerFunction(recyclerView, getkey_status);
 
         return view;
     }
 
 
-    private void RecyclerFunction(final RecyclerView recyclerView, final int status, String uid) {
+    private void RecyclerFunction(final RecyclerView recyclerView, final int status) {
         if (status == 0){
             myRef.orderByChild("terima").equalTo("ya").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -85,6 +92,7 @@ public class ListLaporan_frag extends Fragment {
                         String status_ongoing = dataSnapshot1.child("status_ongoing").getValue().toString();
                         String status_done = dataSnapshot1.child("status_done").getValue().toString();
                         String terima = dataSnapshot1.child("terima").getValue().toString();
+                        String status_pelapor = dataSnapshot1.child("status_pelapor").getValue().toString();
 
                         model.setUid(uid);
                         model.setNama(nama);
@@ -97,6 +105,7 @@ public class ListLaporan_frag extends Fragment {
                         model.setStatus_ongoing(status_ongoing);
                         model.setStatus_done(status_done);
                         model.setTerima(terima);
+                        model.setStatus_pelapor(status_pelapor);
                         list.add(model);
                         }
                         recyclerView.setAdapter(kepalaLab_rcAdapter);
@@ -126,6 +135,7 @@ public class ListLaporan_frag extends Fragment {
                                 String status_ongoing = dataSnapshot1.child("status_ongoing").getValue().toString();
                                 String status_done = dataSnapshot1.child("status_done").getValue().toString();
                                 String terima = dataSnapshot1.child("terima").getValue().toString();
+                                String status_pelapor = dataSnapshot1.child("status_pelapor").getValue().toString();
 
                                 model.setUid(uid);
                                 model.setNama(nama);
@@ -138,6 +148,7 @@ public class ListLaporan_frag extends Fragment {
                                 model.setStatus_ongoing(status_ongoing);
                                 model.setStatus_done(status_done);
                                 model.setTerima(terima);
+                                model.setStatus_pelapor(status_pelapor);
                                 list.add(model);
                             }
                             recyclerView.setAdapter(kasiRcAdapter);

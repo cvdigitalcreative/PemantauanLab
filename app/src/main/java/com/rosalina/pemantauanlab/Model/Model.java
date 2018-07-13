@@ -15,6 +15,42 @@ public class Model {
     public String status_laporan;
     public String status_ongoing;
     public String status_done;
+    public String username;
+    public String status_read;
+    public String status_pelapor;
+
+    public String getStatus_read() {
+        return status_read;
+    }
+
+    public void setStatus_read(String status_read) {
+        this.status_read = status_read;
+    }
+
+    public String status;
+
+    public String getStatus_pelapor() {
+        return status_pelapor;
+    }
+
+    public void setStatus_pelapor(String status_pelapor) {
+        this.status_pelapor = status_pelapor;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getTerima() {
         return terima;
