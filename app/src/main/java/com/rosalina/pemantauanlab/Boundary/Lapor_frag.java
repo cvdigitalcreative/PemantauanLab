@@ -37,6 +37,7 @@ public class Lapor_frag extends Fragment {
 
     List<Model> list = new ArrayList<>();
     FirebaseAuth firebaseAuth;
+    String date, month;
     public Lapor_frag() {
         // Required empty public constructor
     }
@@ -76,9 +77,7 @@ public class Lapor_frag extends Fragment {
         action.setTitle("Buat Laporan");
 
 
-//        int datetime = calendar.get(Calendar.DATE);
-//        int hours = calendar.get(Calendar.HOUR_OF_DAY);
-//        int minute = calendar.get(Calendar.MINUTE);
+//
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -90,20 +89,12 @@ public class Lapor_frag extends Fragment {
 
                 Date calendar = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                SimpleDateFormat dateTanggal = new SimpleDateFormat("dd");
+                SimpleDateFormat dateBulan = new SimpleDateFormat("MMM");
                 String currentdate = dateFormat.format(calendar);
-                System.out.println(currentdate);
-//                DateFormat dateFormat = DateFormat.getDateF
-//                String currentdate = currenttime.toString();
-//                System.out.println(currenttime);
+                date = dateTanggal.format(calendar);
+                month = dateBulan.format(calendar);
 
-
-//                String month = calendar.get(Calendar.MONTH);
-//                String date = calendar.get(Calendar.DATE);
-//                String hours = calendar.get(Calendar.HOUR_OF_DAY);
-//                String minute = calendar.get(Calendar.MINUTE);
-
-
-                //check for null valued Editext
                 if (!isEmpty(namamhs.getText().toString().trim()) && !isEmpty(kelas.getText().toString().trim())
                         && !isEmpty(namabarang.getText().toString().trim()) && !isEmpty(nounit.getText().toString().trim())
                         && !isEmpty(lokasi.getText().toString().trim()) && !isEmpty(jumlah.getText().toString().trim())
@@ -143,18 +134,9 @@ public class Lapor_frag extends Fragment {
 
         String key = database.getReference("Lapor").push().getKey();
         DatabaseReference reference = database.getReference().child("Laporan").child(key);
-      // Model gvalue = reference.setValue(Model.class);
 
-      // String nama1 = gvalue.getNama();
-//        String kelas = gvalue.getKelas();
-//        String namabarang = gvalue.getNama_barang();
-//        String nounit = gvalue.getNo_unit();
-//        String lokasi = gvalue.getLokasi();
-//        String jumlah = gvalue.getJumlah();
-//        String uraian = gvalue.getUraian_kerusakan();
-
-        //Write harus pake model
-
+        reference.child("tanggal").setValue(date);
+        reference.child("bulan").setValue(month);
         reference.child("terima").setValue("tidak");
         reference.child("status_done").setValue("undone");
         reference.child("status_ongoing").setValue("notgoing");

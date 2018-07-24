@@ -47,6 +47,11 @@ public class KepalaLab_RcAdapter extends RecyclerView.Adapter<KepalaLab_RcAdapte
     holder.nama.setText(model.getNama());
     holder.namabarang.setText(model.getNama_barang());
     holder.uid.setText(model.getUid());
+        System.out.println("coyyyaa");
+        System.out.println(model.getTanggal());
+        System.out.println(model.getBulan());
+    holder.tanggals.setText(model.getTanggal());
+    holder.bulan.setText(model.getBulan());
     //holder.ongoing.setText(model.status_ongoing);
         if (model.status_done.equals("undone")){
             holder.kelas.setText("Laporan Diterima");
@@ -178,10 +183,13 @@ public class KepalaLab_RcAdapter extends RecyclerView.Adapter<KepalaLab_RcAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView ongoing, done, uid, nama, namalist,kelaslist, namabaranglist, kelas, namabarang, nounit, lokasi, jumlah, uraiankerusakan;
+        public TextView tanggals, done, uid, nama, bulan, kelas, namabarang;
 
         public ViewHolder(View itemview){
             super(itemview);
+
+            tanggals = itemView.findViewById(R.id.tanggal_fo);
+            bulan = itemView.findViewById(R.id.bulans);
             nama = itemview.findViewById(R.id.nama_pelapor);
             kelas = itemview.findViewById(R.id.kelas_pelapor);
             namabarang = itemview.findViewById(R.id.nama_barang);

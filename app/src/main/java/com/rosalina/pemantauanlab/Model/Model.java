@@ -12,22 +12,29 @@ public class Model {
     public String lokasi;
     public String jumlah;
     public String uraian_kerusakan;
-    public String status_laporan;
     public String status_ongoing;
     public String status_done;
     public String username;
-    public String status_read;
     public String status_pelapor;
-
-    public String getStatus_read() {
-        return status_read;
-    }
-
-    public void setStatus_read(String status_read) {
-        this.status_read = status_read;
-    }
-
+    public String tanggal;
+    public String bulan;
     public String status;
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
+    }
+
+    public String getBulan() {
+        return bulan;
+    }
+
+    public void setBulan(String bulan) {
+        this.bulan = bulan;
+    }
 
     public String getStatus_pelapor() {
         return status_pelapor;
@@ -82,14 +89,6 @@ public class Model {
 
     public void setUid(String uid) {
         this.uid = uid;
-    }
-
-    public String getStatus_laporan() {
-        return status_laporan;
-    }
-
-    public void setStatus_laporan(String status_laporan) {
-        this.status_laporan = status_laporan;
     }
 
     public String getNama() {

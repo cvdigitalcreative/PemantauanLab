@@ -82,6 +82,8 @@ public class ListLaporan_frag extends Fragment {
                         Model model = new Model();
 
                         String uid = dataSnapshot1.getKey();
+                        String tanggal = dataSnapshot1.child("tanggal").getValue().toString();
+                        String bulan = dataSnapshot1.child("bulan").getValue().toString();
                         String nama = dataSnapshot1.child("nama_pelapor").getValue().toString();
                         String kelas = dataSnapshot1.child("kelas").getValue().toString();
                         String namabarang = dataSnapshot1.child("nama_barang").getValue().toString();
@@ -94,6 +96,8 @@ public class ListLaporan_frag extends Fragment {
                         String terima = dataSnapshot1.child("terima").getValue().toString();
                         String status_pelapor = dataSnapshot1.child("status_pelapor").getValue().toString();
 
+                        model.setTanggal(tanggal);
+                        model.setBulan(bulan);
                         model.setUid(uid);
                         model.setNama(nama);
                         model.setKelas(kelas);
@@ -125,6 +129,8 @@ public class ListLaporan_frag extends Fragment {
                                 Model model = new Model();
 
                                 String uid = dataSnapshot1.getKey();
+                                String tanggal = dataSnapshot1.child("tanggal").getValue().toString();
+                                String bulan = dataSnapshot1.child("bulan").getValue().toString();
                                 String nama = dataSnapshot1.child("nama_pelapor").getValue().toString();
                                 String kelas = dataSnapshot1.child("kelas").getValue().toString();
                                 String namabarang = dataSnapshot1.child("nama_barang").getValue().toString();
@@ -138,6 +144,8 @@ public class ListLaporan_frag extends Fragment {
                                 String status_pelapor = dataSnapshot1.child("status_pelapor").getValue().toString();
 
                                 model.setUid(uid);
+                                model.setTanggal(tanggal);
+                                model.setBulan(bulan);
                                 model.setNama(nama);
                                 model.setKelas(kelas);
                                 model.setNama_barang(namabarang);

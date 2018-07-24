@@ -47,6 +47,8 @@ public class Kasi_RcAdapter extends RecyclerView.Adapter<Kasi_RcAdapter.ViewHold
         View view = null;
         holder.nama.setText(model.getNama());
         holder.namabarang.setText(model.getNama_barang());
+        holder.tanggals.setText(model.getTanggal());
+        holder.bulan.setText(model.getBulan());
 
         if (model.getStatus_done().equals("done")){
             holder.kelas.setText("Selesai");
@@ -228,11 +230,13 @@ public class Kasi_RcAdapter extends RecyclerView.Adapter<Kasi_RcAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView terima, uid, nama, namalist,kelaslist, namabaranglist, kelas, namabarang, nounit, lokasi, jumlah, uraiankerusakan;
+        public TextView terima, uid, nama, tanggals, bulan, kelas, namabarang;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            tanggals = itemView.findViewById(R.id.tanggal_fo);
+            bulan = itemView.findViewById(R.id.bulans);
             nama = itemView.findViewById(R.id.nama_pelapor);
             kelas = itemView.findViewById(R.id.kelas_pelapor);
             namabarang = itemView.findViewById(R.id.nama_barang);

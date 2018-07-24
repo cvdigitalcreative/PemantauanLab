@@ -27,18 +27,16 @@
                 android:gravity="center">
                 <TextView
                     android:textColor="@color/text2"
-                    android:id="@+id/tanggal"
+                    android:id="@+id/tanggal_fo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="40dp"
-                    android:text="20"/>
+                    android:textSize="35dp" />
 
                 <TextView
                     android:textColor="@color/text2"
-                    android:id="@+id/bulantahun"
+                    android:id="@+id/bulans"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Juli"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
